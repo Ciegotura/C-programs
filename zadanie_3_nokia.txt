@@ -1,0 +1,44 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+int solution(vector<int> &A, int X, int Y) {
+    //musisz zwrucic minimalny koszt rechabilitacji
+    int wynik_tmp = 0;
+    int wynik = -1;
+    if(A.size()<=(X-1)*Y)
+        return 0;
+
+    for(int i = 0;i<(A.size() - (X-1)*Y);i++){
+        //glowna petla, tyle będzie ciągow
+        for(int j = i;j<=((X-1)*Y+i);j=j+Y){
+                //cout<<"Jestem w for j:"<<j<<endl;
+            wynik_tmp+=A[j];
+
+            if(wynik_tmp>=wynik&&wynik!=-1)
+                break;
+
+        }
+        if(wynik_tmp<wynik||wynik ==-1)
+            wynik = wynik_tmp;
+        wynik_tmp = 0;
+
+
+    }
+
+
+    return wynik;
+}
+int main()
+{
+    //cout << "Hello world!" << endl;
+    vector <int> A= {4, 2, 3, 7};
+    vector <int> B= {10, 3, 4, 7};
+    vector <int> C= {4,2,5,4,3,5,1,4,2,7};
+    cout<<solution(C,4,1);
+    //int wyn = 200000*1000;
+    //cout<<wyn;
+    return 0;
+}

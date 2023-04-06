@@ -1,0 +1,46 @@
+// you can use includes, for example:
+
+//#include <algorithm>
+#include <math.h>
+#include <vector>
+
+// you can write to stdout for debugging purposes, e.g.
+// cout << "this is a debug message" << endl;
+
+vector<int> solution(int N) {
+    // Implement your solution here
+    
+    vector < int > wynik;
+    wynik.push_back(1); //first element of vector
+    //cout<<wynik[0]<<endl;
+    if(N>0&&N!=2){
+    unsigned int sq_in = pow(N,0.5);   //square root of input
+   
+    //unsigned int m = pow(n,2);
+    int b = pow(sq_in,2);
+    unsigned int roznica = N-b;
+   // cout<<b<<endl;
+    for(int c = 1; c<sq_in;c++){
+        wynik.push_back((wynik[c-1]+2));
+        
+    }
+    if (roznica>wynik[sq_in-1]){ //tu kiedy ruznica jest wieksza od ostatniego elementu
+        if(roznica%2==0){
+            wynik[sq_in-1]=roznica+wynik[sq_in-1];
+        }else{
+            wynik[sq_in-1]=roznica;
+        }
+    }else{ //tu gdy jest mniejsza lub rowna 0
+        if(roznica%2==0){
+        wynik[sq_in-1]=roznica+wynik[sq_in-1];
+        }else{
+        wynik[sq_in-2]=wynik[sq_in-2]+wynik[sq_in-1]+roznica;
+        wynik.pop_back();
+        }
+
+
+    }
+    }
+    return wynik;
+
+}

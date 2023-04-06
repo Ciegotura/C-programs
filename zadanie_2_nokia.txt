@@ -1,0 +1,75 @@
+
+// you can use includes, for example:
+#include <algorithm>
+#include <iostream>
+
+// you can write to stdout for debugging purposes, e.g.
+// cout << "this is a debug message" << endl;
+
+int solution(vector<int> &A) {
+    // Implement your solution here
+    sort(A.begin(), A.end()); //sortowanie
+    vector<int> B = A; //kopiuje wektor wejsciowy aby nie popsuc danych wejsciowych
+    vector<short> roznice;//wektor roznic
+    vector<short> wektor_wynikowy; //wektor przechowujancy ciag wynikowy
+    if(A[0]<1||A[0]>100||A[A.size()-1]<1||A[A.size()-1]>100||A.size()<2||A.size()>50){
+        return 1; //sprawdzenie czy wektor wejsciowy spelnia zalozenia
+    }
+    short tmp;
+    short max_rozmiar_wynik=0;
+    short ster_0=1;
+
+    for(int i = 0;i<A.size()-1;i++) { //iterowanie po wartosciach 
+        tmp=B[0];//pierwszy element  wartosc TMP jest dobra
+   
+        if(max_rozmiar_wynik >A.size()/2){
+            break; //przerwanie dzialania funkcji gdy nie da sie juz wiekszego ciagu znalesc
+        }
+ 
+        for(int j = 1; j<B.size();j++){  //utworzenie wektora roznic
+            roznice.push_back(B[j]-B[0]);//ten wektor jest dobry
+
+        }
+  
+        for(int j = 0;j<roznice.size();j++){ //tu iteruje po roznicach 
+        
+            wektor_wynikowy.push_back(tmp); //dodanie pierwszy element do wektora wynikowego
+        
+            for(int k = 0;k<B.size();k++){
+               
+                tmp+=roznice[j]; //drugi element ciagu
+                for(int l = 0;l<B.size();l++){ //sprawdzenie czy drugi element nalezy do danych wejsciowych 
+                   
+                    if(B[l]==tmp&&roznice[j]!=0&&wektor_wynikowy[wektor_wynikowy.size()-1]==tmp-roznice[j]){//
+                        wektor_wynikowy.push_back(tmp); //przypadek gdy roznica jest wieksza od 0
+                    }
+                    if(roznice[j]==0&&B[ster_0]==tmp&&ster_0<B.size()){ 
+                       
+                        wektor_wynikowy.push_back(tmp); //gdy roznica jest rowna 0
+                        ster_0++;
+                       
+                    }
+
+                }
+                
+            }
+            if(wektor_wynikowy.size()>max_rozmiar_wynik){
+
+                max_rozmiar_wynik=wektor_wynikowy.size(); //maksymalna ilosc skladowych szukanego ciagu
+
+            }
+            wektor_wynikowy.clear();
+            ster_0=1;
+
+
+        }//koniec pentli iterujancej po roznicach
+
+        roznice.clear(); //usuwanie elementow wekrora roznic
+        B.erase(B.begin()); //usuniencie pierwszej liczby z wektora wejsciowego
+
+    }
+
+    B.clear();
+    wektor_wynikowy.clear();
+    return max_rozmiar_wynik;
+}
