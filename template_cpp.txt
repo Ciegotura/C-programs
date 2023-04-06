@@ -1,0 +1,173 @@
+   #include <iostream>
+
+using namespace std;
+
+//szablon klasy, kompilator na podstawie tego generuje klase, czyli jest wtedy tworzona klasa szablonowa, mowimy na to klasa szablonowa lub specjalizacja
+// zamiast dowolny_typ daje sie T
+template<typename dowolny_typ>
+    class przechowalnia {
+    private:
+        dowolny_typ przechowywana;
+    public:
+        void przechowaj(dowolny_typ wart) {
+            przechowywana = wart;
+
+        }
+        dowolny_typ zwroc() {
+            return przechowywana;
+
+        }
+};
+
+// szablon funkcji
+    template<typename T>
+    T maksimum(T pierwsza, T druga) {
+        return (pierwsza > druga) ? pierwsza : druga;
+    }
+
+    template<typename T>
+    void zwienksz() {
+        T wart;
+        cout << "Podaj wartosc: ";
+        cin >> wart;
+
+
+    }
+    class Tablica {
+    public:
+        Tablica(int rozmiar);
+        int& operator[](unsigned int indeks) {
+            return tab[indeks];
+        };
+        ~Tablica() { delete[] tab; };
+    private:
+        int rozmiar;
+        int* tab;
+    };
+
+
+
+class PrzechowalniaCalkowite {
+private:
+    int przechowywana;
+public:
+    void przechiwaj(int liczba) {
+        przechowywana = liczba;
+    };
+    int zwroc() {
+        return przechowywana;
+    };
+
+};
+
+class PrzechowalniaFloat {
+private:
+    float przechowywana;
+public:
+    void przechiwaj(float liczba) {
+        przechowywana = liczba;
+    };
+    float zwroc() {
+        return przechowywana;
+    };
+
+};
+
+template<typename T>
+
+class TablicaN {
+public:
+    TablicaN(int rozmiar);
+    T& operator[](unsigned int indeks) {
+        return tab[indeks];
+    };
+    ~TablicaN() { delete[] tab; };
+    void najw_element() {
+        T wynik;
+        for (int i = 1; i < rozmiar; i++) {
+
+            (tab[i] > tab[i - 1]) ? wynik = tab[i] : wynik = tab[i - 1];
+
+
+        }
+        cout << "Najwienkszy element jest rowny: " << wynik << endl;
+    };
+
+    void najm_element();
+
+
+
+
+private:
+    int rozmiar;
+    T* tab;
+};
+
+
+
+
+int main()
+{
+    cout << "Hello World!\n";
+
+    //przechowalnia<int> calkowita;
+    //int wartosc, druga;
+    //cout << "Podaj wartosc calkowita: ";
+    //cin >> wartosc;
+    //cout << "Podaj druga wartosc calkowita: ";
+    //cin >> druga;
+    //cout << "wartosc wieksza to :" << maksimum(wartosc, druga) << endl;
+    //calkowita.przechowaj(wartosc);
+    //cout << "Wartosc przechowywana to: " << calkowita.zwroc() << endl;
+
+    int rozmiar;
+    cout << "podaj rozmiar tablicy: ";
+    cin >> rozmiar;
+    TablicaN<int> a(rozmiar);
+    for (int i = 0; i < rozmiar; i++) {
+        a[i] = 1 + i;
+        cout << a[i] << " ";
+    }
+    cout << endl;
+    a.najw_element();
+    a.najm_element();
+
+
+
+    return 0;
+}
+
+Tablica::Tablica(int rozmiar)
+{
+    tab = new int[rozmiar];
+    this->rozmiar = rozmiar;
+    for (int i = 0; i < this->rozmiar; i++)
+        tab[i] = 1;
+}
+
+
+template<typename T>
+TablicaN<T>::TablicaN(int rozmiar)
+{
+    tab = new T[rozmiar];
+    this->rozmiar = rozmiar;
+    for (int i = 0; i < this->rozmiar; i++)
+        tab[i] = 1.5;
+}
+
+template<typename T> //definicja funkcji w szablonie klasy
+void TablicaN<T>::najm_element() {
+    T wynik;
+    wynik = tab[0];
+    for (int i = 1; i < rozmiar; i++) {
+
+        (wynik > tab[i - 1]) ? wynik = tab[i - 1] : wynik = wynik;
+
+
+    }
+    cout << "Najmniejszy element jest rowny: " << wynik << endl;
+
+
+}
+
+

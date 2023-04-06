@@ -1,0 +1,118 @@
+     #include <iostream>
+
+using namespace std;
+
+class Adres {
+public:
+
+    friend class osoba;
+
+private:
+
+    string ulica;
+    int nr_domu;
+    int nr_mieszkania;
+    string kod_pocztowy;
+    string nazwa_miejscowosci;
+
+
+
+};
+
+
+class osoba {
+public:
+
+    void zapis_imienia();
+    void zapis_nazwiska();
+    void zapis_peselu();
+    void pokaz_dane_osoby();
+    void dodaj_adres();
+    void wyswietl_dane_adresowe();
+
+
+
+private:
+    string imie;
+    string nazwisko;
+    string pesel;
+    Adres adres;
+};
+
+
+int main()
+{
+    int ilosc;
+    cout << "Podaj ilosc odob: ";
+    cin >> ilosc;
+    osoba* wskos;
+    wskos = new osoba[ilosc]; //tyle osob bede chcial wypelnic
+
+    for (int i = 0; i < ilosc; i++) {
+
+        wskos[i].zapis_imienia();
+        wskos[i].zapis_nazwiska();
+        wskos[i].zapis_peselu();
+        wskos[i].dodaj_adres();
+
+    }
+
+    for (int i = 0; i < ilosc; i++) {
+
+        wskos[i].pokaz_dane_osoby();
+        wskos[i].wyswietl_dane_adresowe();
+
+    }
+
+    osoba piotr;
+
+
+    //piotr.zapis_imienia();
+    //piotr.zapis_nazwiska();
+    //piotr.zapis_peselu();
+    //piotr.pokaz_dane_osoby();
+}
+
+void osoba::zapis_imienia()
+{
+    cout << "Podaj imie: ";
+    cin >> imie;
+
+}
+
+void osoba::zapis_nazwiska()
+{
+    cout << "Podaj nazwisko: ";
+    cin >> nazwisko;
+}
+
+void osoba::zapis_peselu()
+{
+    cout << "Podaj pesel: ";
+    cin >> pesel;
+}
+
+void osoba::pokaz_dane_osoby()
+{
+    cout << "Osoba nazywa sie: " << imie <<" "<< nazwisko << " i ma numer pesel:" << pesel << endl;
+}
+
+void osoba::dodaj_adres()
+{
+    cout << "Podaj nazwe ulicy: ";
+    cin >> adres.ulica;
+    cout << "Podaj numer domu: ";
+    cin >> adres.nr_domu;
+    cout << "Podaj numer mieszkania: ";
+    cin >> adres.nr_mieszkania;
+    cout << "Podaj kod pocztowy: ";
+    cin >> adres.kod_pocztowy;
+    cout << "Podaj nazwe miejscowosci: ";
+    cin >> adres.nazwa_miejscowosci;
+}
+
+void osoba::wyswietl_dane_adresowe()
+{
+    cout << "Mieszka na ulicy: " << adres.ulica << " numer domu: " << adres.nr_domu << " numer mieszkania: " << adres.nr_mieszkania << " kod pocztowy: " << adres.kod_pocztowy <<" w miejscowosci: "<<adres.nazwa_miejscowosci <<endl;
+}
+

@@ -1,0 +1,64 @@
+      #include <iostream>
+
+using namespace std;
+
+struct Tbland_obliceniowy {
+
+    string opis_blendu;
+
+};
+struct Tblad_dzielenia : Tbland_obliceniowy {
+
+    int ilosc;
+
+};
+
+double policz_pole_kuli(double promien);
+
+int main()
+{
+    cout << "Hello World!\n";
+    double r;
+    cout << "Podaj promien kuli: ";
+    cin >> r;
+    try {
+        cout << "pole kuli o promieniu" << r << ": " << policz_pole_kuli(r) << endl;
+
+    }
+    catch (Tbland_obliceniowy wyjatek)
+    {
+        cout << "przechwycony wyjontek " << wyjatek.opis_blendu << endl;
+    } //tu lepiej ukladac od szczegulu do ogulu a nie jak tu
+    catch (Tblad_dzielenia wyjatek)
+    {
+        cout << "Przechwycony wyjatek " << wyjatek.opis_blendu << endl;
+        cout << "ilosc: " << wyjatek.ilosc << endl;
+
+    }
+    catch (...) {
+        cout << "przechwycony nieznany wyjantek" << endl;
+
+    }
+
+
+    return 0;
+
+}
+
+double policz_pole_kuli(double promien) {
+
+    cout << " obliczenie pola kuli" << endl;
+    if (promien > 0) {
+        return 4 * promien * promien * 3.14;
+    }
+    else {
+        cout << "rzucenie wyjatku" << endl;
+        Tbland_obliceniowy blad;
+        blad.opis_blendu = "zerowy lub ujemny promien kuli";
+        throw blad; //tu rzucilismy wyjantek i on trefia do catcha
+
+
+    }
+
+
+}

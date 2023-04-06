@@ -1,0 +1,61 @@
+              #include <iostream>
+    #include <deque> // biblioteka do kolejek
+    #include<algorithm> // biblioteka do algorytmu sortowania
+
+
+    using namespace std;
+
+    int main()
+    {
+        deque<int> kolejka;
+        deque<int>::iterator iter; //iterator , po nim mozna iterowac
+    sobie w kolejce
+        cout << "Hello World!\n";
+        int rozmiar, ini;
+        cout << "Podaj rozmiar kolejki: ";
+        cin >> rozmiar;
+        cout << "podaj wartosc inicjujonca: ";
+        cin >> ini;
+        for (int i = 0; i < rozmiar; i++) {
+            kolejka.push_back(ini);
+            ini += 2;
+
+        }
+        for (int el : kolejka) { //wyswietlanie takie se w zmodyfikowanym forze
+            cout << el << " ";
+
+        }
+        for (int i = 0; i < rozmiar; i++) {
+            kolejka.push_front(ini);
+            ini += 4;
+
+
+        }
+        cout << endl;
+
+
+        for (iter = kolejka.begin(); iter != kolejka.end(); iter++) {
+    //wyswietlanie z urzyciem itratora
+            cout << *iter << " ";
+
+        }
+        cout << endl;
+        sort(kolejka.begin(), kolejka.end());
+
+        deque<int>::iterator kon = kolejka.end();
+        for (iter=kolejka.begin(); iter != kon; iter++)
+        {
+            cout << *iter << " ";
+
+        }
+
+
+        cout << endl;
+        auto wynik = minmax_element(kolejka.begin(), kolejka.end());
+        cout << "element najmniejszy: " << *wynik.first << endl;
+        cout << "element najmniejszy: " << *wynik.second << endl;
+
+        return 0;
+
+
+    }

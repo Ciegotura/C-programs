@@ -1,0 +1,45 @@
+#include <iostream>
+#include <cmath>
+#include <fstream>
+using namespace std;
+
+int main()
+{
+    int a, b, c, i;
+    float d, x1, x2;
+    ifstream daneee("daneee.txt");
+    ofstream wyniki("wyniki.txt");
+   if (daneee.is_open()){
+    while(!daneee.eof()){
+        daneee>>a>>b>>c;
+        d=b*b-4*a*c;
+        cout<<"Delta jest rowna:"<<d<<endl;
+         if(d>0){
+            x1=(-b + sqrt(d))/(2*a);
+            x2=(-b - sqrt(d))/(2*a);
+            cout<<"Rownanie ma 2 rozwiazania:"<<endl;
+            cout<<"x1= "<<x1<<endl<<"x2= "<<x2<<endl<<endl;
+            wyniki<<"x1= "<<x1<<endl;
+            wyniki<<"x2= "<<x2<<endl;
+         }
+         else if (d==0){
+            x1=(-b)/(2*a);
+            cout<<"x1= "<<x1<<endl<<endl;
+            wyniki<<"x1 ="<<x1<<endl<<endl<<endl;
+            }
+            else if (d<0){
+                cout<<"Brak rozwionzan"<<endl<<endl;
+
+            }
+    }
+
+   }
+   daneee.close();
+   wyniki.close();
+    return 0;
+}
+wyniki.close();
+
+
+return 0;
+}

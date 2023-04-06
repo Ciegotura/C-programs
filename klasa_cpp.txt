@@ -1,0 +1,120 @@
+       #include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
+class tablica_dynamiczna {
+public:
+    void utwurz_tablice();
+    void utwurz_tablicei(int i = 1);
+    void pokaz_tablice();
+    void wypelnij_tablice();
+    void wypelnij_tablice_losowo(int min,int max);
+
+
+    tablica_dynamiczna();
+    tablica_dynamiczna(int i);
+    ~tablica_dynamiczna();
+
+private:
+    int rozmiar;
+    int* tablica;
+};
+
+int main()
+{
+    //int aa;
+    //int* bb;
+    //bb = &aa;
+    //int* tablica;
+    //int rozmiar;
+    int min;
+    int max;
+    tablica_dynamiczna* wsk2,wsk;
+    wsk = new tablica_dynamiczna;
+    for (int i = 0; i < 3; i++)
+        wsk2[i] = new tablica_dynamiczna;
+    //lub
+    //bb = new aa;
+    //cout << "Podaj rozmiar tablicy liczb całkowitych: "<<endl;
+    //cin >> rozmiar;
+    //tablica = new int[rozmiar];
+    //for (int i = 0; i < rozmiar; i++)
+    //    *(tablica + i) = i;
+    //for (int i = 0; i < rozmiar; i++)
+    //    cout << *(tablica + i) << " ";
+    //cout << endl;
+   // delete[] tablica;//jerzeli kasujemy zmienna to wystarczy tylko nazwa zmiennej, a jak kasujemy tablice to dajemy jeszcze przed tym[]
+
+
+    tablica_dynamiczna tab1;
+    cout << "Podaj przedzial min max losowy do wypelnienia tablicy ";
+    cin >> min;
+    cin >> max;
+    tab1.wypelnij_tablice_losowo(min, max);
+
+    tab1.pokaz_tablice();
+
+
+    return 0;
+
+}
+
+void tablica_dynamiczna::utwurz_tablice()
+{
+    cout << "Podaj rozmiar tablicy: ";
+    cin >> rozmiar;
+    tablica = new int[rozmiar];
+
+}
+
+void tablica_dynamiczna::utwurz_tablicei(int i=1)
+{
+    rozmiar = i;
+    tablica = new int[rozmiar];
+}
+
+void tablica_dynamiczna::pokaz_tablice()
+{
+    for (int i = 0; i < rozmiar; i++)
+        cout << *(tablica + i) << " ";
+    cout << endl;
+
+}
+
+void tablica_dynamiczna::wypelnij_tablice()
+{
+    for (int i = 0; i < rozmiar; i++)
+        *(tablica + i) = i;
+
+}
+
+void tablica_dynamiczna::wypelnij_tablice_losowo(int min,int max)
+{
+    srand(time(NULL));
+    for (int i = 0; i < rozmiar; i++)
+        *(tablica + i) = (rand()%(max-min+1)) + min;
+}
+
+tablica_dynamiczna::tablica_dynamiczna()
+{
+    int rozmiar = 0;
+    utwurz_tablice();
+    wypelnij_tablice();
+        pokaz_tablice();
+
+}
+
+tablica_dynamiczna::tablica_dynamiczna(int i)
+{
+     utwurz_tablicei(i);
+     utwurz_tablice();
+     wypelnij_tablice();
+     pokaz_tablice();
+}
+
+tablica_dynamiczna::~tablica_dynamiczna()
+{
+    delete[] tablica;
+}

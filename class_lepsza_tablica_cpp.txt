@@ -1,0 +1,136 @@
+      #include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
+
+
+class wraptab {
+public:
+    void utwurz_tablicei(int i);
+    void wypelnij_tablice_losowo(int min, int max);
+    void pokaz_tablice();
+    int suma_tablicy();
+    wraptab();
+    ~wraptab();
+
+private:
+    int rozmiar;
+    int* tablica;
+
+
+};
+
+int najwienksza_wartosc_sumy_tablicy(int ilosc, wraptab* wsk) {
+    int w=0, wp=0;
+    for (int i = 0; i < ilosc; i++) {
+        w=wsk[i].suma_tablicy();
+        if (w > wp)
+            wp = w;
+    }
+
+    return wp;
+};
+
+int main()
+{
+    srand(time(NULL));
+
+    cout << "Podaj ile obiektow wraptab chcesz utworzyc: ";
+    int ilosc;
+    cin >> ilosc;
+    wraptab* wsk;
+
+
+        wsk = new wraptab[ilosc];
+
+        for (int i = 0; i < ilosc; i++) {
+
+            wsk[i].utwurz_tablicei(7 + i);
+            wsk[i].wypelnij_tablice_losowo(0, 10);
+            wsk[i].pokaz_tablice();
+
+
+
+        }
+
+        for (int i = 0; i < ilosc; i++) {
+            cout << "Suma tablicy: ";
+
+
+            cout << wsk[i].suma_tablicy() << " " << endl;
+        }
+
+        cout << "Najwienksza wartosc sumy tablicy" << najwienksza_wartosc_sumy_tablicy(ilosc, wsk) << endl;
+
+            delete[] wsk;
+
+
+
+
+
+
+
+
+    return 0;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+wraptab::wraptab() {
+
+    //rozmiar = 10;
+    //utwurz_tablicei(rozmiar);
+    //wypelnij_tablice_losowo(0, 10);
+
+
+
+}
+wraptab::~wraptab() {
+
+    delete[] tablica;
+
+}
+
+void wraptab::wypelnij_tablice_losowo(int min, int max)
+{
+    //srand(time(NULL));
+    for (int i = 0; i < rozmiar; i++)
+        *(tablica + i) = (rand() % (max - min + 1)) + min;
+}
+void wraptab::utwurz_tablicei(int i)
+{
+    rozmiar = i;
+    tablica = new int[rozmiar];
+}
+
+void wraptab::pokaz_tablice()
+{
+    for (int i = 0; i < rozmiar; i++) {
+        cout << *(tablica + i) << " ";
+
+
+    }
+        cout << endl;
+}
+
+int wraptab::suma_tablicy() {
+    int w = 0;
+    for (int i = 0; i < rozmiar; i++) {
+        w += *(tablica + i);
+    }
+
+    return w;
+}

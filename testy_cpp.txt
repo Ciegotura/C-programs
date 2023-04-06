@@ -1,0 +1,140 @@
+             #include <iostream>
+#include <vector>
+
+using namespace std;
+
+struct Tbland_obliceniowy {
+
+    string opis_blendu;
+
+};
+
+class test {
+    friend Tbland_obliceniowy;
+
+public:
+    int rozmiar = 10;
+    vector<bool> wektor;
+    float a[10]={1,2,0,2,-1,1,2,0,2,-1 };
+    float b[10]={2,-2,2,0,1,1,2,0,2,-1 };
+
+
+float dziel(float a, float b) {
+
+   if (b != 0) {
+        return a/b;
+   }
+   else {
+        cout << "rzucenie wyjatku" << endl;
+       Tbland_obliceniowy blad;
+       blad.opis_blendu = "nie dziel przez zero";
+        throw blad; //tu rzucilismy wyjantek i on trefia do catcha
+
+
+    }
+
+
+}
+void testuj() {
+
+    for (int i = 0; i < rozmiar; i++) {
+        float wynik = 0;
+        try {
+             wynik = dziel(a[i], b[i]);
+        }
+        catch (Tbland_obliceniowy wyjatek)
+        {
+            cout << "przechwycony wyjontek " << wyjatek.opis_blendu << endl;
+            wektor.push_back(true);
+
+        }
+        if (a[i] > 0 && b[i] > 0) {
+
+            if (wynik > 0) {
+                wektor.push_back(true);
+
+            }
+            else {
+                wektor.push_back(false);
+            }
+
+        }
+        if (a[i] > 0 && b[i] < 0) {
+
+            if (wynik < 0) {
+                wektor.push_back(true);
+
+            }
+            else {
+                wektor.push_back(false);
+            }
+
+        }
+        if (a[i] < 0 && b[i] > 0) {
+
+            if (wynik < 0) {
+                wektor.push_back(true);
+
+            }
+            else {
+                wektor.push_back(false);
+            }
+
+        }
+        if (a[i] == 0 && b[i]!=0) {
+
+            if (wynik == 0) {
+                wektor.push_back(true);
+
+            }
+            else {
+                wektor.push_back(false);
+            }
+
+        }
+        if (a[i] < 0 && b[i] < 0) {
+
+            if (wynik > 0) {
+                wektor.push_back(true);
+
+            }
+            else {
+                wektor.push_back(false);
+            }
+
+        }
+
+    }
+
+
+}
+
+void pokaz() {
+
+    for ( int el : wektor) {
+
+        cout << wektor[el]<<endl;
+
+
+    }
+
+}
+};
+
+
+
+
+int main()
+{
+    cout << "Hello World!\n";
+    test x;
+
+        x.testuj();
+        x.pokaz();
+
+
+
+
+
+
+}

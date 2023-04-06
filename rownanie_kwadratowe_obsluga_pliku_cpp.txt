@@ -1,0 +1,61 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+
+using namespace std;
+int a, b, c;
+float x1, x2, d;
+int main(){
+
+fstream dane, wyniki;
+
+wyniki.open("wyniki.txt",ios::out);
+if(!wyniki.good()){
+    cout<<"blond"<<endl;
+}
+
+dane.open("dane.txt",ios::in);
+if(!dane.good()){
+    cout<<"blond"<<endl;
+
+}
+do{
+dane>>a>>b>>c;
+cout<<a<<endl<<b<<endl<<c<<endl;
+
+} while(!dane.eof());
+
+d=b*b-4*a*c;
+
+if(d>0){
+cout<<"Delta jest rowna: "<<d<<endl;
+x1=((-b)-sqrt(d))/2*a;
+x2=((-b)+sqrt(d))/2*a;
+cout<<"Rownanie ma dwa rozwiazania"<<endl;
+cout<<"x1= "<<x1<<"x2= "<<x2<<endl;
+wyniki<<"x1= "<<x1<<endl;
+wyniki<<"x2= "<<x2<<endl<<endl;
+
+}
+else if(d=0){
+
+    x1=(-b)/2*a;
+    cout<<"Rownanie ma jedno rozwiazanie"<<endl;
+    cout<<"x1= "<<x1<<endl;
+    wyniki<<"x1="<<x1<<endl;
+
+
+}
+else if(d<0){
+
+    cout<<"brak rozwianzania";
+
+}
+
+
+dane.close();
+wyniki.close();
+
+
+return 0;
+}

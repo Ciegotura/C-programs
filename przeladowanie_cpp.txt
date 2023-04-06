@@ -1,0 +1,134 @@
+   #include <iostream>
+using namespace std;
+
+class Zespolone {
+public:
+
+    Zespolone(double r = 0, double i = 0) : Re{ r }, Im{ i } {}; //onstruktor z listom inicjalizujancom
+
+    Zespolone operator+(Zespolone z); //Przeladowanie operatora dodawania
+    Zespolone operator-(Zespolone z);
+    Zespolone operator*(Zespolone z);
+    Zespolone operator/(Zespolone z);
+    friend ostream& operator <<(ostream& wy, Zespolone& z);
+    operator double() { return Re; } // tu konwertuje to na double
+private:
+    double Re;
+    double Im;
+
+};
+
+class Zespolone2 {
+public:
+    Zespolone2(double j = 0, double i = 0) :j{ j }, i{i} {};
+    Zespolone2 operator <<(Zespolone2 z) {
+
+        cout << "j: " << z.j << endl;
+        cout << "i: " << z.i << endl;
+        return z;
+    }
+private:
+    double j;
+    double i;
+
+};
+
+class TablicaN {
+public:
+
+    int& operator[](unsigned int indeks) { //przeladowanie operatora tablicowego
+        return tab[indeks];
+    };
+private:
+    int tab[10];
+
+};
+
+
+
+//Przeladowanie operatora <<
+ostream& operator <<(ostream& wy, Zespolone& z) {
+
+    wy << "Rzeczywista: " << z.Re << endl;
+    wy << "Urojona: " << z.Im << endl;
+    return wy;
+}
+
+
+int main()
+{
+    Zespolone z1(10, 20), z2(1, 2), suma;
+
+    //suma = z1.operator+(z2); tak powinno byc formalnie
+    suma = z1 + z2;
+    cout << "suma: " << suma << endl;
+    suma = z1 - z2;
+    cout << "roznica: " << suma << endl;
+    suma = z1 * z2;
+    cout << "iloczyn: " << suma << endl;
+    suma = z1 / z2;
+    cout << "iloraz: " << suma << endl;
+    suma = 0;
+    cout << "zero:" << suma<<endl;
+    double z = z1;
+    cout << "Po konwersji: " << z << endl; // konwersja
+
+
+    Zespolone2 zz(1, 2);
+    zz<<zz;
+
+    TablicaN a;
+    a[1] = 10;
+
+    return 0;
+}
+
+// Uruchomienie programu: Ctrl + F5 lub menu Debugowanie > Uruchom bez debugowania
+// Debugowanie programu: F5 lub menu Debugowanie > Rozpocznij debugowanie
+
+// Porady dotyczące rozpoczynania pracy:
+//   1. Użyj okna Eksploratora rozwiązań, aby dodać pliki i zarządzać nimi
+//   2. Użyj okna programu Team Explorer, aby nawiązać połączenie z kontrolą źródła
+//   3. Użyj okna Dane wyjściowe, aby sprawdzić dane wyjściowe kompilacji i inne komunikaty
+//   4. Użyj okna Lista błędów, aby zobaczyć błędy
+//   5. Wybierz pozycję Projekt > Dodaj nowy element, aby utworzyć nowe pliki kodu, lub wybierz pozycję Projekt > Dodaj istniejący element, aby dodać istniejące pliku kodu do projektu
+//   6. Aby w przyszłości ponownie otworzyć ten projekt, przejdź do pozycji Plik > Otwórz > Projekt i wybierz plik sln
+
+Zespolone Zespolone::operator+(Zespolone z)
+{
+    Zespolone wynik;
+    wynik.Re = this->Re + z.Re;
+    wynik.Im = this->Im + z.Im;
+
+    return wynik;
+}
+
+Zespolone Zespolone::operator-(Zespolone z)
+{
+    Zespolone wynik;
+    wynik.Re = this->Re - z.Re;
+    wynik.Im = this->Im - z.Im;
+
+    return wynik;
+}
+
+Zespolone Zespolone::operator*(Zespolone z)
+{
+    Zespolone wynik;
+    wynik.Re = this->Re * z.Re;
+    wynik.Im = this->Im * z.Im;
+
+    return wynik;
+}
+
+Zespolone Zespolone::operator/(Zespolone z)
+{
+    Zespolone wynik;
+    if(z.Re!=0)
+    wynik.Re = this->Re / z.Re;
+    if(z.Im!=0)
+    wynik.Im = this->Im / z.Im;
+
+    return wynik;
+}
+

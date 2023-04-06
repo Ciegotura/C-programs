@@ -1,0 +1,48 @@
+      #include <iostream>
+    #include <vector>
+
+
+    using namespace std;
+
+    class Funkcja_por {
+
+    private:
+        int porownaj;
+    public:
+        Funkcja_por(int p) :porownaj{ p } {}; //konstruktor
+        bool operator()(int liczba) const { //przeladowanie operatora
+
+            return liczba > porownaj; //zwraca true or false
+        };
+
+
+    };
+
+    int zliczanie(vector<int> wektor, Funkcja_por kryterium) {   //wectro
+    to taki szablon ktory przechowuje wartosc
+        int licznik = 0;
+        for (int el : wektor) { //for zakresowy (po kazdym elemencie z
+    tego wektora bedzie lecic
+
+            if (kryterium(el)) { //a tu wywoluje przeciaonrzenie
+
+                licznik++;
+
+            }
+
+        }
+
+        return licznik;
+    }
+
+    int main()
+    {
+        vector<int> v{ 3, 44, 12, 5, 31, 45,6 }; //wektor
+        //cout << "Hello World!\n";
+        int ile = zliczanie(v, Funkcja_por(9)); //tu konstruktor idzie
+        cout << "wartosc wienkszych od 9 jest: " << ile << endl;
+
+        return 0;
+    }
+
+
